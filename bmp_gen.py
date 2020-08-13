@@ -2,7 +2,7 @@ import binascii
 
 
 def main():
-    with open('file.bmp', 'wb') as opened_file:
+    with open('file_2.bmp', 'wb') as opened_file:
         write_bmp_header(opened_file)
         write_dib_header(opened_file)
         write_pixel_data(opened_file)
@@ -22,12 +22,12 @@ def write_bmp_header(file):
 
 def write_dib_header(file):
     header_size = ['28', '00', '00', '00']
-    image_width = ['04', '00', '00', '00']
-    image_height = ['02', '00', '00', '00']
+    image_width = ['0F', '00', '00', '00']
+    image_height = ['0F', '00', '00', '00']
     color_planes = ['01', '00']
     bits_per_pixel = ['18', '00']
     compression = ['00', '00', '00', '00']
-    image_size = ['18', '00', '00', '00']
+    image_size = ['00', '03', '00', '00']
     x_pixels_per_m = ['00', '00', '00', '00']
     y_pixels_per_m = ['00', '00', '00', '00']
     total_colors = ['00', '00', '00', '00']
@@ -42,9 +42,10 @@ def write_dib_header(file):
 
 
 def write_pixel_data(file):
-    pixel_array = ['FF', 'FF', '00', 'FF', '00', 'FF', '00', 'FF', 'FF',
-                   '00', '00', '00', '00', '00', 'FF', 'FF', '00', '00',
-                   'FF', 'FF', 'FF']
+    # pixel_array = ['FF', 'FF', '00', 'FF', '00', 'FF', '00', 'FF', 'FF',
+    #                '00', '00', '00', '00', '00', 'FF', '00', 'FF', '00'
+    #                'FF', '00', '00', 'FF', 'FF', 'FF']
+    pixel_array = ['42', 'FF', '68']*256
     write_hex_data(file, pixel_array)
 
 
